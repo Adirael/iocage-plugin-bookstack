@@ -1,6 +1,6 @@
 # Experimental
 
-This plugin is experimental. It has not been testing at all
+This plugin is experimental. It has not been tested at all
 
 # Install
 
