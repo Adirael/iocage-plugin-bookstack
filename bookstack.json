@@ -4,20 +4,20 @@
   "release": "11.3-RELEASE",
   "artifact": "https://github.com/Adirael/iocage-plugin-bookstack.git",
   "pkgs": [
-    "git", 
-    "nginx", 
-    "openssl", 
-    "mariadb102-server", 
-    "php71", 
-    "php71-tidy", 
-    "php71-tokenizer", 
-    "php71-openssl", 
-    "php71-pdo", 
-    "php71-mysqli", 
-    "php71-simplexml", 
-    "php71-mbstring"
+    "git",
+    "nginx",
+    "openssl",
+    "mariadb102-server",
+    "php73",
+    "php73-tidy",
+    "php73-tokenizer",
+    "php73-openssl",
+    "php73-pdo",
+    "php73-mysqli",
+    "php73-simplexml",
+    "php73-mbstring"
   ],
-  "packagesite": "http://pkg.FreeBSD.org/FreeBSD:11:amd64/latest ",
+  "packagesite": "http://pkg.FreeBSD.org/FreeBSD:11:amd64/latest",
   "fingerprints": {
     "iocage-plugins": [
       {
