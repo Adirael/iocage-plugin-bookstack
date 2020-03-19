@@ -26,7 +26,8 @@
     "php73-gd",
     "php73-xml",
     "php73-fileinfo",
-    "php73-xmlwriter"
+    "php73-xmlwriter",
+    "php73-session"
   ],
   "packagesite": "http://pkg.FreeBSD.org/FreeBSD:11:amd64/latest",
   "fingerprints": {

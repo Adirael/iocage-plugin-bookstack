@@ -30,6 +30,7 @@ DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.
 DELETE FROM mysql.user WHERE User='';
 DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 CREATE USER 'bookstack'@'localhost' IDENTIFIED BY 'password';
+CREATE DATABASE bookstack character set UTF8mb4 collate utf8mb4_bin;
 GRANT ALL PRIVILEGES ON *.* TO 'bookstack'@'localhost' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON bookstack.* TO 'bookstack'@'localhost';
 FLUSH PRIVILEGES;
@@ -44,6 +45,14 @@ php -r "unlink('composer-setup.php');"
 # Install bookstack
 cd /usr/local/bookstack || exit
 composer install
+chown -R www:www /usr/local/bookstack
 cp .env.example .env
 
-# Add seds
+# Update env
+sed -i '' -e 's?DB_DATABASE=database_database?DB_DATABASE=bookstack?g' /usr/local/bookstack/.env
+sed -i '' -e 's?DB_USERNAME=database_username?DB_USERNAME=bookstack?g' /usr/local/bookstack/.env
+sed -i '' -e 's?DB_PASSWORD=database_user_password?DB_PASSWORD=password?g' /usr/local/bookstack/.env
+
+# Regenerate key and intall tables
+php artisan key:generate --force
+php artisan migrate --force
