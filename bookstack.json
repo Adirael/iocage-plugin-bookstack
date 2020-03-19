@@ -15,7 +15,18 @@
     "php73-pdo",
     "php73-mysqli",
     "php73-simplexml",
-    "php73-mbstring"
+    "php73-mbstring",
+    "php73-hash",
+    "php73-json",
+    "php73-phar",
+    "php73-filter",
+    "php73-zlib",
+    "php73-curl",
+    "php73-dom",
+    "php73-gd",
+    "php73-xml",
+    "php73-fileinfo",
+    "php73-xmlwriter"
   ],
   "packagesite": "http://pkg.FreeBSD.org/FreeBSD:11:amd64/latest",
   "fingerprints": {
