@@ -18,50 +18,6 @@ sed -i '' -e 's/;listen.group = www/listen.group = www/g' /usr/local/etc/php-fpm
 sed -i '' -e 's/;listen.mode = 0660/listen.mode = 0600/g' /usr/local/etc/php-fpm.d/www.conf
 sed -i '' -e 's?;cgi.fix_pathinfo=1?cgi.fix_pathinfo=0?g' /usr/local/etc/php.ini
 
-
-# Write ginx configuration
-cat > /usr/local/etc/nginx/nginx.conf <<EOL
-worker_processes  1;
-
-events {
-    worker_connections  1024;
-}
-
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
-    keepalive_timeout  65;
-    root /usr/local/bookstack/public;
-
-    server {
-        listen       80;
-        server_name _;
-        index index.php;
-        client_max_body_size 100M;
-
-        location / {
-            try_files \$uri \$uri/ /index.php?\$query_string;
-        }
-
-        location ~ \.php$ {
-          include fastcgi_params;
-          fastcgi_pass            unix:/var/run/php-fpm.sock;
-          fastcgi_index            index.php;
-          fastcgi_buffers            8 16k;
-          fastcgi_buffer_size        32k;
-          fastcgi_param DOCUMENT_ROOT    \$realpath_root;
-          fastcgi_param SCRIPT_FILENAME    \$realpath_root\$fastcgi_script_name;
-        }
-
-        error_page   500 502 503 504  /50x.html;
-            location = /50x.html {
-            root   /usr/local/www/nginx-dist;
-        }
-    }
-}
-EOL
-
 # Start the service
 service nginx start 2>/dev/null
 service php-fpm start 2>/dev/null
