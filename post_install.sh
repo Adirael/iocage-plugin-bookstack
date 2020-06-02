@@ -1,9 +1,9 @@
 # Create user and set up the folders
-pw useradd -n sickrage -c "bookstack" -s /sbin/nologin -w no
+pw useradd -n bookstack -c "bookstack" -s /sbin/nologin -w no
 git clone https://github.com/BookStackApp/BookStack.git --branch release --single-branch /usr/local/bookstack
 
 # Install dependencies
-# pkg install -y git nginx openssl mariadb102-server php71 php71-tidy php71-tokenizer php71-openssl php71-pdo php71-mysqli php71-simplexml php71-mbstring
+pkg install -y git nginx openssl mariadb102-server php73 php73-tidy php73-tokenizer php73-openssl php73-pdo php73-mysqli php73-simplexml php73-mbstring php73-json php73-filter php73-phar php73-hash php73-zlib php73-curl php73-dom php73-gd php73-xml php73-fileinfo php73-session php73-pdo_mysql
 
 # Enable autostart for php, nginx and mysql
 sysrc -f /etc/rc.conf nginx_enable="YES"
@@ -21,7 +21,7 @@ sed -i '' -e 's?;cgi.fix_pathinfo=1?cgi.fix_pathinfo=0?g' /usr/local/etc/php.ini
 # Start the service
 service nginx start 2>/dev/null
 service php-fpm start 2>/dev/null
-service mysql-server start 2>/dev/null
+service mysql-server start
 
 # Configure mysql
 mysql -u root <<-EOF
@@ -44,7 +44,7 @@ php -r "unlink('composer-setup.php');"
 
 # Install bookstack
 cd /usr/local/bookstack || exit
-composer install
+composer install --no-dev
 chown -R www:www /usr/local/bookstack
 cp .env.example .env
 
@@ -53,6 +53,9 @@ sed -i '' -e 's?DB_DATABASE=database_database?DB_DATABASE=bookstack?g' /usr/loca
 sed -i '' -e 's?DB_USERNAME=database_username?DB_USERNAME=bookstack?g' /usr/local/bookstack/.env
 sed -i '' -e 's?DB_PASSWORD=database_user_password?DB_PASSWORD=password?g' /usr/local/bookstack/.env
 
-# Regenerate key and intall tables
+# Set proper permissions
+chmod -R 755 bootstrap/cache public/uploads storage
+
+# Regenerate key and install tables
 php artisan key:generate --force
 php artisan migrate --force
