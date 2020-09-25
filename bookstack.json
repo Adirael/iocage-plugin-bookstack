@@ -1,7 +1,7 @@
 {
   "name": "bookstack",
   "plugin_schema": "2",
-  "artifact": "https://github.com/sam-harry/iocage-plugin-bookstack.git",
+  "artifact": "https://github.com/Adirael/iocage-plugin-bookstack.git",
   "release": "12.1-RELEASE",
   "pkgs": [
     "php74", "php74-mbstring", "php74-tokenizer", "php74-pdo", "php74-pdo_mysql",
