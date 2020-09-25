@@ -33,9 +33,9 @@ composer install --no-dev
 cp .env.example .env
 
 # Update env
-sed -i '' 's|DB_DATABASE=.*$|DB_DATABASE=bookstack|' .env
-sed -i '' 's|DB_USERNAME=.*$|DB_USERNAME=bookstack|' .env
-sed -i '' "s|DB_PASSWORD=.*\$|DB_PASSWORD=$DB_PASS|" .env
+sed -i '' 's|DB_DATABASE=.*$|DB_DATABASE=bookstack|' /usr/local/www/bookstack/.env
+sed -i '' 's|DB_USERNAME=.*$|DB_USERNAME=bookstack|' /usr/local/www/bookstack/.env
+sed -i '' "s|DB_PASSWORD=.*\$|DB_PASSWORD=$DB_PASS|" /usr/local/www/bookstack/.env
 
 # Set proper permissions
 chown -R www:www /usr/local/www/bookstack
@@ -49,6 +49,7 @@ php artisan migrate --no-interaction --force
 service php-fpm restart
 service nginx reload
 
+touch /root/PLUGIN_INFO
 echo "DATABASE_NAME=bookstack" >> /root/PLUGIN_INFO
 echo "DB_USERNAME=bookstack" >> /root/PLUGIN_INFO
-echo "DB_PASSWORD=${$DB_PASS}" >> /root/PLUGIN_INFO
+echo "DB_PASSWORD=$DB_PASS" >> /root/PLUGIN_INFO
