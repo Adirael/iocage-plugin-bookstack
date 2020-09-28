@@ -1,11 +1,11 @@
 # Experimental
 
-This plugin is experimental. It has not been tested at all
+This plugin is experimental. It seems to work, but pull requests are welcome.
 
 # Install
 
-Clone this repository on your FreeNAS server. And run the following command to create a new jail with it. 
+Clone this repository on your FreeNAS server, then run the following command to create a new jail with it.
 
 ```
-iocage fetch -P bookstack.json --name bookstack ip4_addr="vnet0|192.168.1.152/24" defaultrouter="192.168.1.1"
+iocage fetch -P bookstack.json --name bookstack dhcp="on"
 ``` 
