@@ -1,0 +1,9 @@
+{
+    "bind": {
+        "MANIFEST": "bookstack.json",
+        "description": "Bookstack wiki",
+        "name": "Bookstack",
+        "official": false,
+        "primary_pkg": null
+    }
+}
